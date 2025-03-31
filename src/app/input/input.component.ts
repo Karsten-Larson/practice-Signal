@@ -7,21 +7,17 @@ import { DataServices } from '../data.service';
   imports: [FormsModule],
   template: `
     <div>
-      <input type='text' [(ngModel)]='input' (keyup)="sendInput()" />
-
-</div>
+      <input type="text" [(ngModel)]="input" (keyup)="sendInput()" />
+    </div>
   `,
   styles: ``,
 })
 export class InputComponent {
   input: string = '';
-  
-  //EventEmitter object for output binding
-  @Output() output: EventEmitter<string> = new EventEmitter();
 
   dataService = inject(DataServices);
 
   sendInput() {
-    this.output.emit(this.input);
+    this.dataService.searchTerm.set(this.input);
   }
 }
